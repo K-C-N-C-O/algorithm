@@ -1,0 +1,20 @@
+class Solution {
+    public boolean canMakeSubsequence(String str1, String str2) {
+        int n1 = str1.length();
+        int n2 = str2.length();
+        int p1 = 0;
+        int p2 = 0;
+        while (p1 < n1 && p2 < n2) {
+            char target = str2.charAt(p2);
+            while (p1 < n1) {
+                char c = str1.charAt(p1++);
+                char c1 = (char)((c + 1 - 'a') % 26 + 'a'); 
+                if (c == target || c1 == target) {
+                    p2++;
+                    break;
+                }
+            }
+        }
+        return p2 >= n2;
+    }
+}
