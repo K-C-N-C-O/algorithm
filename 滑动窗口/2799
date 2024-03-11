@@ -1,0 +1,27 @@
+class Solution {
+    public int countCompleteSubarrays(int[] nums) {
+        Map<Integer,Integer> map = new HashMap<>();
+        Set<Integer> set= new HashSet<>();
+        for (int num : nums) {
+            set.add(num);
+        }
+        
+        int len = set.size();
+        
+        int left = 0;
+        int ans = 0;
+        
+        for (int num : nums) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+            while (map.size() == len) {
+                map.put(nums[left], map.get(nums[left]) - 1);
+                if (map.get(nums[left]) == 0) {
+                    map.remove(nums[left]);
+                }
+                left++;
+            }
+            ans += left;
+        }
+        return ans;
+    }
+}
