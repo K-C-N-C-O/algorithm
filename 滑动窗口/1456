@@ -1,0 +1,25 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        char[] arr=s.toCharArray();
+        int count=0;
+        int l=arr.length;
+        int[] nums=new int[l];
+        for(int i=0;i<l;i++){
+            if("aeiou".indexOf(arr[i])>=0){
+                nums[i]=1;
+            }else{
+                nums[i]=0;
+            }
+        }
+        for(int j=0;j<k;j++){
+            count+=nums[j];
+        }
+        int Max=count;
+        for(int i=k;i<l;i++){
+            count=count+nums[i]-nums[i-k];
+            Max=Math.max(count,Max);
+        }
+        return Max;
+
+    }
+}
