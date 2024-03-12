@@ -1,0 +1,23 @@
+class Solution {
+    public int minimumRecolors(String blocks, int k) {
+        char[] arr=blocks.toCharArray();
+        int num=0;
+        for(int i=0;i<k;i++){
+            if(arr[i]=='B'){
+                num++;
+            }
+        }
+        int ans=num;
+        for(int left=0,right=k;right<arr.length;right++,left++){
+            if(arr[right]=='B'){
+                num++;
+            }
+            if(arr[left]=='B'){
+                num--;
+            }
+            ans=Math.max(ans,num);
+        }
+        return k-ans;
+
+    }
+}
