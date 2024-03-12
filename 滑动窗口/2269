@@ -1,0 +1,25 @@
+class Solution {
+    public int divisorSubstrings(int num, int k) {
+        List<Integer> list=new ArrayList<>();
+        int x=num;
+        while(x!=0){
+            list.add(x%10);
+            x/=10;
+        }
+        Collections.reverse(list);
+        int left=0,right=k-1,ans=0;
+        while(right<list.size()){
+            int n=0;
+            for(int i=left;i<=right;i++){
+                n=n*10+list.get(i);
+            }
+            if(n!=0&&num%n==0){
+                ans++;
+            }
+            left++;
+            right++;
+        }
+        return ans;
+
+    }
+}
