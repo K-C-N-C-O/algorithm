@@ -1,0 +1,71 @@
+class Solution {
+    public int numKLenSubstrNoRepeats(String s, int k) {
+        Map<Character,Integer> have=new HashMap<>();
+        char[] str=s.toCharArray();
+        for(int i=0;i<k-1;i++){
+            have.put(str[i],have.getOrDefault(str[i],0)+1);
+        }
+        int ans=0;
+        for(int left=0,right=k-1;right<str.length;right++,left++){
+            have.put(str[right],have.getOrDefault(str[right],0)+1);
+            if(have.size()==k){
+                ans++;
+            }
+            have.put(str[left],have.get(str[left])-1);
+            if(have.get(str[left])==0){
+                have.remove(str[left]);
+            }
+
+        }
+        return ans;
+
+
+    }
+}
+
+
+class Solution {
+    public int numKLenSubstrNoRepeats(String s, int k) {
+        // 复用第一种方法中的条件
+        // 对于k > 26，不存在只有唯一字符的子字符串
+        if (k > 26)
+            return 0;
+        
+        int answer = 0;
+        int n = s.length();
+        
+        // 初始化左、右指针
+        int left = 0, right = 0;
+        // 初始化频率数组
+        int freq[] = new int[26];
+        
+        while (right < n) {
+            
+            // 在频率数组中添加当前字符
+            freq[s.charAt(right) - 'a']++;
+            
+            // 如果当前字符在频率数组中出现多次
+            // 继续收缩窗口并从频率数组中删除字符，直到当前字符的频率变为1。
+            while (freq[s.charAt(right) - 'a'] > 1) {
+                freq[s.charAt(left) - 'a']--;
+                left++;
+            }
+            
+            
+            // 检查当前唯一子字符串的长度是否等于k
+            if (right - left + 1 == k) {
+                answer++;
+                
+                // 收缩窗口并从频率数组中移除最左边的字符
+                freq[s.charAt(left) - 'a']--;
+                left++;
+            }
+            
+            // 拓展窗口
+            right++;
+        }
+        
+        return answer;
+    }
+}
+
