@@ -1,0 +1,31 @@
+class Solution {
+    public int minSwaps(int[] nums) {
+        int cnt=0;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]==0){
+                cnt++;
+            }
+        }
+        int ans=0;
+        for(int i=0;i<cnt;i++){
+            if(nums[i]==0){
+                ans++;
+            }
+        }
+        int sum=ans;
+        int[] arr=new int[nums.length*2];
+        System.arraycopy(nums, 0, arr, 0, nums.length);
+        System.arraycopy(nums, 0, arr, nums.length, nums.length);
+        for(int left=0,right=cnt;right<nums.length+cnt-1;right++,left++){
+            if(arr[right]==0){
+                sum++;
+            }
+            if(arr[left]==0){
+                sum--;
+            }
+            ans=Math.max(ans,sum);
+        }
+        return cnt-ans;
+
+    }
+}
