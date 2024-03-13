@@ -1,0 +1,20 @@
+class Solution {
+    public int[] distinctNumbers(int[] nums, int k) {
+        Map<Integer,Integer> have=new HashMap<>();
+        int n=nums.length;
+        int[] ans=new int[n-k+1];
+        for(int i=0;i<k-1;i++){
+            have.put(nums[i],have.getOrDefault(nums[i],0)+1);
+        }
+        for(int left=0,right=k-1;right<n;right++,left++){
+            have.put(nums[right],have.getOrDefault(nums[right],0)+1);
+            ans[left]=have.size();
+            have.put(nums[left],have.get(nums[left])-1);
+            if(have.get(nums[left])==0){
+                have.remove(nums[left]);
+            }
+        }
+        return ans;
+
+    }
+}
