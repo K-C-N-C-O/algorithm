@@ -1,0 +1,22 @@
+class Solution {
+    public int shareCandies(int[] candies, int k) {
+        Map<Integer,Integer> have=new HashMap<>();
+        for(int i=k;i<candies.length;i++){
+            have.put(candies[i],have.getOrDefault(candies[i],0)+1);
+        }
+
+
+        int ans=have.size();
+        for(int left=0,right=k;right<candies.length;++right,++left){
+            have.put(candies[left],have.getOrDefault(candies[left],0)+1);
+            have.put(candies[right],have.get(candies[right])-1);
+            if(have.get(candies[right])==0){
+                have.remove(candies[right]);
+            }
+            ans=Math.max(ans,have.size());
+        }
+        return ans;
+
+
+    }
+}
