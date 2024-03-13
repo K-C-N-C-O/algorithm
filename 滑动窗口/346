@@ -1,0 +1,23 @@
+class MovingAverage {
+    double sum;
+    Queue<Integer> q;
+    int size;
+
+    public MovingAverage(int size) {
+        q=new ArrayDeque<>();
+        this.size=size;
+        sum=0;
+        
+
+    }
+    
+    public double next(int val) {
+        if(q.size()==size){
+            sum-=q.poll();
+        }
+        q.offer(val);
+        sum+=val;
+        return sum/q.size();
+
+    }
+}
