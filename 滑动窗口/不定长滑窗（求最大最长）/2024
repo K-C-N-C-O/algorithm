@@ -1,0 +1,23 @@
+class Solution {
+    public int maxConsecutiveAnswers(String answerKey, int k) {
+        return Math.max(Max(answerKey, k, 'T'), Max(answerKey, k, 'F'));
+
+    }
+
+    public int Max(String answerKey, int k, char ch) {
+        char[] a = answerKey.toCharArray();
+        int n = a.length;
+        int left = 0, ans = 0,sum = 0;
+        for (int right = 0; right < n; right++) {
+            if (a[right] != ch) {
+                sum++;
+            }
+            while(sum>k){
+                sum-=a[left++]!=ch?1:0;
+            }
+            ans=Math.max(ans,right-left+1);
+        }
+        return ans;
+
+    }
+}
