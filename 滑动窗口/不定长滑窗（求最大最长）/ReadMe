@@ -1,2 +1,4 @@
 1493 求长度尽量用right-left做不容易出bug
 2730 循环需要对循环变量初始计算又不写入循环里导致每轮循环都会计算时，for比while更好
+1438 TreeMap 有序性：TreeMap 中的键值对根据其键的自然顺序进行排序，或者根据构造 TreeMap 时提供的 Comparator 进行排序。因此，遍历 TreeMap 将按照键的顺序进行。
+             可导航性：TreeMap 提供了一些导航方法，例如 firstKey()、lastKey()、lowerKey(K key)、higherKey(K key)，可以帮助获取比给定键小或大的最接近的键。
