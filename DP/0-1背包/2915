@@ -1,0 +1,29 @@
+class Solution {
+    int[][] memo;
+    List<Integer> nums;
+
+    public int lengthOfLongestSubsequence(List<Integer> nums, int target) {
+        this.nums=nums;
+        int n=nums.size();
+        memo=new int[n][target+1];
+        for(int i=0;i<n;i++){
+            Arrays.fill(memo[i],-1);
+        }
+        int ans=dfs(n-1,target);
+        return ans<0?-1:ans;
+
+    }
+
+    public int dfs(int i,int t){
+        if(i<0){
+            return t==0?0:Integer.MIN_VALUE;
+        }
+        if(nums.get(i)>t){
+            return memo[i][t]=dfs(i-1,t);
+        }
+        if(memo[i][t]!=-1){
+            return memo[i][t];
+        }
+        return memo[i][t]=Math.max(dfs(i-1,t),dfs(i-1,t-nums.get(i))+1);
+    }
+}
