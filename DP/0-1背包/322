@@ -1,0 +1,29 @@
+class Solution {
+    int[] coins;
+    int[][] memo;
+
+    public int coinChange(int[] coins, int amount) {
+        int n=coins.length;
+        this.coins=coins;
+        memo=new int[n][amount+1];
+        for(int i=0;i<n;i++){
+            Arrays.fill(memo[i],-1);
+        }
+        int ans=dfs(n-1,amount);
+        return ans<Integer.MAX_VALUE/2?ans:-1;
+    }
+
+    public int dfs(int i,int c){
+        if(i<0){
+            return c==0?0:Integer.MAX_VALUE/2;//防止下面+1溢出
+        }
+        if(coins[i]>c){
+            return memo[i][c]=dfs(i-1,c);
+        }
+        if(memo[i][c]!=-1){
+            return memo[i][c];
+        }
+        memo[i][c]=Math.min(dfs(i-1,c),dfs(i,c-coins[i])+1);
+        return memo[i][c];
+    }
+}
