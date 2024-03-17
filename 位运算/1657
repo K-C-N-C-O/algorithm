@@ -1,0 +1,23 @@
+class Solution {
+    public boolean closeStrings(String word1, String word2) {
+        int mask1=0,mask2=0,m=word1.length(),n=word2.length();
+        if(m!=n){
+            return false;
+        }
+        int[] cnt1=new int[26],cnt2=new int[26];
+        for(char c:word1.toCharArray()){
+            mask1|=1<<(c-'a');
+            cnt1[c-'a']++;
+        }
+
+        for(char c:word2.toCharArray()){
+            mask2|=1<<(c-'a');
+            cnt2[c-'a']++;
+        }
+        Arrays.sort(cnt1);
+        Arrays.sort(cnt2);
+        return mask1==mask2&&Arrays.equals(cnt1,cnt2);
+    
+
+    }
+}
