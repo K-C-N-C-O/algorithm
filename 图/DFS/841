@@ -1,0 +1,26 @@
+class Solution {
+    boolean[] visited;
+
+    public boolean canVisitAllRooms(List<List<Integer>> rooms) {
+        int n=rooms.size();
+        visited=new boolean[n];
+        traverse(rooms,0);
+        for(boolean x:visited){
+            if(!x){
+                return false;
+            }
+        }
+        return true;
+
+    }
+
+    void traverse(List<List<Integer>> rooms,int s){
+        if(visited[s]){
+            return;
+        }
+        visited[s]=true;       
+        for(int n:rooms.get(s)){
+            traverse(rooms,n);
+        }
+    }
+}
