@@ -1,0 +1,27 @@
+class Solution {
+    public long maxScore(int[] nums1, int[] nums2, int k) {
+        int n=nums1.length;
+        long ans=0L;
+        Integer[] sorts=new Integer[n];
+        for(int i=0;i<n;i++){
+            sorts[i]=i;
+        }
+        Arrays.sort(sorts,(a,b)->nums2[b]-nums2[a]);//从大到小
+
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+        long sum=0L;
+        for(int i=0;i<k-1;i++){
+            sum+=nums1[sorts[i]];
+            pq.offer(nums1[sorts[i]]);
+        }
+
+        for(int i=k-1;i<n;i++){
+            sum+=nums1[sorts[i]];
+            pq.offer(nums1[sorts[i]]);
+            ans=Math.max(ans,nums2[sorts[i]]*sum);
+            sum-=pq.poll();
+        }
+        return ans;
+
+    }
+}
