@@ -1,0 +1,19 @@
+class Solution {
+    public int pairSum(ListNode head) {
+        ListNode prev = null, curr = head, last = head;
+        while (last != null) {
+            last = last.next.next;
+            ListNode temp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = temp;
+        }
+        int max = 0;
+        while (curr != null) {
+            max = Math.max(max, prev.val + curr.val);
+            prev = prev.next;
+            curr = curr.next;
+        }
+        return max;
+    }
+}
