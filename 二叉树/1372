@@ -1,0 +1,35 @@
+class Solution {
+    int max;
+
+    public int longestZigZag(TreeNode root) {
+        if(root==null){
+            return 0;
+        }
+        max=0;
+        dfs(root,false,0);
+        dfs(root,true,0);
+        return max;
+
+    }
+
+    public void dfs(TreeNode node,boolean dir,int len){
+        maxAns = Math.max(maxAns, len);
+        if (!dir) {
+            if (o.left != null) {
+                dfs(o.left, true, len + 1);
+            }
+            if (o.right != null) {
+                dfs(o.right, false, 1);
+            }
+        } else {
+            if (o.right != null) {
+                dfs(o.right, false, len + 1);
+            }
+            if (o.left != null) {
+                dfs(o.left, true, 1);
+            }
+        }
+
+
+    }
+}
