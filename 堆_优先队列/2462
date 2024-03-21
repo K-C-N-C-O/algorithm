@@ -1,0 +1,24 @@
+class Solution {
+    public long totalCost(int[] costs, int k, int candidates) {
+        int len = costs.length;
+        long res = 0;
+
+        if(candidates * 2 >= len) {
+            Arrays.sort(costs);
+            for(int i=0; i<k; i++) res += costs[i];
+            return res;
+        }
+
+        int left = 0, right = len - 1;
+        PriorityQueue<Integer> pq1 = new PriorityQueue<>(), pq2 = new PriorityQueue<>();
+        while(k > 0) {
+            while(pq1.size() < candidates && left <= right) pq1.offer(costs[left++]);
+            while(pq2.size() < candidates && left <= right) pq2.offer(costs[right--]);
+
+            if(pq1.isEmpty() || pq2.isEmpty()) res += pq1.isEmpty() ? pq2.poll() : pq1.poll();
+            else res += pq1.peek() <= pq2.peek() ? pq1.poll() : pq2.poll();
+            k--;
+        }
+        return res;
+    }
+}
