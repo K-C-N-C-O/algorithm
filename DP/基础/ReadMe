@@ -1,0 +1,7 @@
+memo 数组的初始值一定不能等于要记忆化的值！例如初始值设置为 000，并且要记忆化的 dfs(i)\textit{dfs}(i)dfs(i) 也等于 000，
+那就没法判断 000 到底表示第一次遇到这个状态，还是表示之前遇到过了，从而导致记忆化失效。一般把初始值设置为 −1-1−1。本题由于方案数均为正数，所以可以初始化成 000。
+作者：灵茶山艾府
+链接：https://leetcode.cn/problems/climbing-stairs/solutions/2560716/jiao-ni-yi-bu-bu-si-kao-dong-tai-gui-hua-7zm1/
+来源：力扣（LeetCode）
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
