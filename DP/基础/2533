@@ -1,0 +1,20 @@
+class Solution {
+    static final int MOD=(int) 1e9+7;
+    public int goodBinaryStrings(int minLength, int maxLength, int oneGroup, int zeroGroup) {
+        int[] dp=new int[maxLength+1];
+        dp[0]=1;
+        int ans=0;
+        for (int i = 1; i <= maxLength; i++) {
+            if (i >= zeroGroup) {
+                dp[i] = (dp[i]+dp[i - zeroGroup])%MOD;
+            }
+            if (i >= oneGroup) {
+                dp[i] = (dp[i]+dp[i - oneGroup])%MOD;
+            }
+            if(i>=minLength){
+                ans=(ans+dp[i])%MOD;
+            }
+        }
+        return ans;
+    }
+}
