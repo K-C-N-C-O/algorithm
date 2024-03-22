@@ -1,0 +1,22 @@
+class Solution {
+    public int deleteAndEarn(int[] nums) {
+        int max=0;
+        for(int val:nums){
+            max=Math.max(max,val);
+        }
+        int[] sum=new int[max+1];
+        for(int x:nums){
+            sum[x]+=x;
+        }
+        return rob(sum);
+        
+    }
+    public int rob(int[] sum){
+        int n=sum.length;
+        int[] dp=new int[n+2];
+        for(int i=0;i<n;i++){
+            dp[i+2]=Math.max(dp[i+1],dp[i]+sum[i]);
+        }
+        return dp[n+1];
+    }
+}
