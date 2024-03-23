@@ -1,0 +1,51 @@
+//选哪个
+class Solution {
+    List<List<Integer>> ans=new ArrayList<>();
+    List<Integer> path=new ArrayList<>();
+    int k;
+
+    public List<List<Integer>> combine(int n, int k) {
+        this.k=k;
+        dfs(n);
+        return ans;
+    }
+
+    public void dfs(int i){
+        if(path.size()==k){
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        int d=k-path.size();
+        for(int j=i;j>d-1;j--){
+            path.add(j);
+            dfs(j-1);
+            path.remove(path.size()-1);
+        }
+    }
+}
+//选or不选
+class Solution {
+    List<List<Integer>> ans=new ArrayList<>();
+    List<Integer> path=new ArrayList<>();
+    int k;
+
+    public List<List<Integer>> combine(int n, int k) {
+        this.k=k;
+        dfs(n);
+        return ans;
+    }
+    public void dfs(int i){
+        if(path.size()==k){
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        int d=k-path.size();
+        if(i<d){
+            return;
+        }
+        dfs(i-1);
+        path.add(i);
+        dfs(i-1);
+        path.remove(path.size()-1);
+    }
+}
