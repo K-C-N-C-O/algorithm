@@ -1,0 +1,38 @@
+class Solution {
+    List<List<String>> ans=new ArrayList<>();
+    List<String> path=new ArrayList<>();
+    String s;
+
+    public List<List<String>> partition(String s) {
+        this.s=s;
+        dfs(0);
+        return ans;
+    }
+
+    public void dfs(int i){
+        if(i==s.length()){
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        for(int j=i;j<s.length();j++){
+            if(ispalindrome(i,j)){
+                path.add(s.substring(i,j+1));
+                dfs(j+1);
+                path.remove(path.size()-1);
+            }
+        }
+    }
+
+
+
+    public boolean ispalindrome(int left,int right){
+        while(left<right){
+            if(s.charAt(left)!=s.charAt(right)){
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
