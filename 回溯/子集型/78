@@ -1,0 +1,45 @@
+// 从输入出发，选或不选
+class Solution {
+    List<List<Integer>> ans=new ArrayList<>();
+    int[] nums;
+    List<Integer> path=new ArrayList<>();
+
+    public List<List<Integer>> subsets(int[] nums) {
+        this.nums=nums;
+        dfs(0);
+        return ans;
+    }
+
+    public void dfs(int i){
+        if(i==nums.length){
+            ans.add(new ArrayList<>(path));
+            return;
+        }
+        dfs(i+1);
+        path.add(nums[i]);
+        dfs(i+1);
+        path.remove(path.size()-1);
+    }
+}
+
+//从输出出发，选哪个
+class Solution {
+    List<List<Integer>> ans=new ArrayList<>();
+    List<Integer> path=new ArrayList<>();
+    int[] nums;
+
+    public List<List<Integer>> subsets(int[] nums) {
+        this.nums=nums;
+        dfs(0);
+        return ans;
+    }
+    public void dfs(int i){
+        ans.add(new ArrayList<>(path));
+        if(i==nums.length) return;
+        for(int j=i;j<nums.length;j++){
+            path.add(nums[j]);
+            dfs(j+1);
+            path.remove(path.size()-1);
+        }
+    }
+}
