@@ -1,0 +1,49 @@
+class Solution {
+    public String replaceWords(List<String> dictionary, String sentence) {
+        Trie t=new Trie();
+        for(String word:dictionary){
+            Trie cur=t;
+            for(int i=0;i<word.length();i++){
+                char c=word.charAt(i);
+                if(cur.next[c-'a']==null){
+                    cur.next[c-'a']=new Trie();
+                }
+                cur=cur.next[c-'a'];
+            }
+            cur.isEnd=true;
+        }
+        String[] words=sentence.split(" ");
+        for(int i=0;i<words.length;i++){
+            words[i]=findPrefix(words[i],t);
+        }
+        return String.join(" ",words);
+    }
+
+    public String findPrefix(String word,Trie t){
+        StringBuffer root=new StringBuffer();
+        Trie cur=t;
+        for(int i=0;i<word.length();i++){
+            char c=word.charAt(i);
+            if(cur.isEnd){
+                return root.toString();
+            }
+            if(cur.next[c-'a']==null){
+                return word;
+            }
+            root.append(c);
+            cur=cur.next[c-'a'];
+        }
+        return root.toString();
+    }
+
+
+}
+
+class Trie{
+    Trie[] next;
+    boolean isEnd;
+    public Trie(){
+        next=new Trie[26];
+        isEnd=false;
+    }
+}
