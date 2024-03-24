@@ -8,7 +8,13 @@ Top K问题
 全部元素堆排序，依次pop  （时间复杂度O(N+klogN) 
 
 
-
+347
+重写priority排序规则
+PriorityQueue<Integer> pq=new PriorityQueue<>(new Comparator<Integer>(){
+    public int compare(Integer a,Integer b){
+        return map.get(a)-map.get(b);
+    }
+};
 
 215
 维护动态数据的最大最小值，可以考虑堆
