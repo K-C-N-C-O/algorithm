@@ -1,0 +1,76 @@
+//基于哈希表
+class Trie {
+    Map<Character, Trie> next;
+    boolean isEnd;
+    public Trie() {
+        this.next = new HashMap<>();
+        this.isEnd = false;
+    }
+    public void insert(String word) {
+        Trie cur = this; // 得到根结点
+        for(char c : word.toCharArray()){
+            if(cur.next.get(c) == null){ // 若当前无此字符，添加之
+                cur.next.put(c, new Trie());
+            }
+            cur = cur.next.get(c); // 向下考察
+        }
+        cur.isEnd = true; // 置末尾字符节点isEnd为true
+    }
+    public boolean search(String word) {
+        Trie end = searchPrefix(word);
+        return end != null && end.isEnd;
+    }
+    public boolean startsWith(String prefix) {
+        return searchPrefix(prefix) != null;
+    }
+    private Trie searchPrefix(String prefix){
+        Trie cur = this;
+        for(char c : prefix.toCharArray()){
+            if(cur.next.get(c) == null){
+                return null; // 无此前缀，返回null
+            }
+            cur = cur.next.get(c);
+        }
+        return cur;
+    }
+}
+
+
+//基于数组化哈希
+class Trie {
+    Trie[] next;
+    boolean isEnd;
+    public Trie() {
+        this.next = new Trie[26];
+        this.isEnd = false;
+    }
+    public void insert(String word) {
+        Trie cur = this; // 得到根结点
+        for(char c : word.toCharArray()){
+            int idx = c - 'a';
+            if(cur.next[idx] == null){ // 若当前无此字符，添加之
+                cur.next[idx] = new Trie();
+            }
+            cur = cur.next[idx]; // 向下考察
+        }
+        cur.isEnd = true; // 置末尾字符节点isEnd为true
+    }
+    public boolean search(String word) {
+        Trie end = searchPrefix(word);
+        return end != null && end.isEnd;
+    }
+    public boolean startsWith(String prefix) {
+        return searchPrefix(prefix) != null;
+    }
+    private Trie searchPrefix(String prefix){
+        Trie cur = this;
+        for(char c : prefix.toCharArray()){
+            int idx = c - 'a';
+            if(cur.next[idx] == null){
+                return null; // 无此前缀，返回null
+            }
+            cur = cur.next[idx];
+        }
+        return cur;
+    }
+}
