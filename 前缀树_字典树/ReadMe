@@ -1,0 +1,8 @@
+要处理前缀，自然而然联想到可以用Trie（前缀树）来处理问题。
+新增节点遍历
+for(char c:key.toCharArray()){
+            if(node.next[c-'a']==null){
+                node.next[c-'a']=new TrieNode();
+            }
+            node=node.next[c-'a'];
+  }
