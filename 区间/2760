@@ -1,0 +1,19 @@
+class Solution {
+    public int longestAlternatingSubarray(int[] nums, int threshold) {
+        int n=nums.length,i=0,maxL=0;
+        while(i<n){
+            int start=i;
+            if(nums[start]%2!=0||nums[start]>threshold){
+                i++;
+                continue;
+            }
+            while(i<n-1&&nums[i] % 2 != nums[i + 1] % 2&&nums[i+1]<=threshold){
+                i++;
+            }
+            maxL=Math.max(maxL,i-start+1);
+            i++;
+        }
+        return maxL;
+
+    }
+}
