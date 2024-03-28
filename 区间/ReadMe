@@ -6,7 +6,9 @@
 i, n = 0, len(nums)
 while i < n:
     start = i
-    while i < n and ...:
+    while i < n-1 and i   i+1...:
         i += 1
-    # 从 start 到 i-1 是一段
-    # 下一段从 i 开始，无需 i+=1
+    (对这一段根据题目要求进行处理）
+    i++;  //下一段从i+1开始
+    //从 start 到 i 是一段
+
