@@ -1,0 +1,16 @@
+class Solution {
+    public long getDescentPeriods(int[] prices) {
+        long sum=0;
+        int n=prices.length,i=0;
+        while(i<n){
+            int start=i;
+            while(i<n-1&&prices[i]-1==prices[i+1]){
+                i++;
+            }
+            long len=i-start+1;
+            sum+=(len+1)*len/2;
+            i++;
+        }
+        return sum;
+    }
+}
