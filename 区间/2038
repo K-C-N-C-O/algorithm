@@ -1,0 +1,23 @@
+class Solution {
+    public boolean winnerOfGame(String colors) {
+        int sumA=0,sumB=0;
+        int n=colors.length(),i=0;
+        while(i<n){
+            int start=i;
+            while(i<n-1&&colors.charAt(i)==colors.charAt(i+1)){
+                i++;
+            }
+            int l=i-start+1;
+            if(l>2){
+                if(colors.charAt(start)=='A'){
+                    sumA+=l-2;
+                }else{
+                    sumB+=l-2;
+                }
+            }
+            i++;
+        }
+        return sumA>sumB;
+
+    }
+}
