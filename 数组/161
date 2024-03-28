@@ -1,0 +1,22 @@
+class Solution {
+    public boolean isOneEditDistance(String s, String t) {
+        int m = s.length(), n = t.length();
+        if (m > n)
+         return isOneEditDistance(t, s);
+        if (Math.abs(m - n) > 1) {
+            return false;
+        }
+        for (int i = 0; i < m; i++)
+            if (s.charAt(i) != t.charAt(i))
+                // 如果字符串具有相同的长度
+                if (m == n)
+                    return s.substring(i + 1).equals(t.substring(i + 1));
+                // 如果字符串具有不同的长度
+                else
+                    return s.substring(i).equals(t.substring(i + 1));
+
+        // 如果在 m 距离上没有差异，则仅当 t 有多一个字符时，字符串才有一次编辑。
+        return (m + 1 == n);
+
+    }
+}
