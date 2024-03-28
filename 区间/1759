@@ -1,0 +1,18 @@
+class Solution {
+    public int countHomogenous(String s) {
+        int MOD =1000000007;
+        int n=s.length(),i=0;
+        int sum=0;
+        while(i<n){
+            int start=i;
+            while(i<n-1&&s.charAt(i)==s.charAt(i+1)){
+                i++;
+            }
+            long l=(i-start+1)%MOD;
+            sum+=(long)(l+1)*l/2%MOD;
+            i++;
+        }
+        return (int)sum%MOD;
+
+    }
+}
