@@ -6,3 +6,7 @@ for(char c:key.toCharArray()){
             }
             node=node.next[c-'a'];
   }
+
+
+212
+究极无敌融合题
