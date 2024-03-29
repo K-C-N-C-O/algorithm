@@ -1,0 +1,24 @@
+class Solution {
+    public String interpret(String command) {
+        StringBuilder sb=new StringBuilder();
+        int n=command.length(),i=0;
+        while(i<n){
+            int start=i;
+            if(command.charAt(i)=='G'){
+                i++;
+                sb.append("G");
+                continue;
+            }
+            while(i<n-1&&command.charAt(i)!=')'){
+                i++;
+            }
+            if(i-start!=1){
+                sb.append("al");
+            }else{
+                sb.append("o");
+            }
+            i++;
+        }
+        return sb.toString();
+    }
+}
