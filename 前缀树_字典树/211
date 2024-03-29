@@ -1,0 +1,41 @@
+class WordDictionary {
+    class Trie{
+        Trie[] next=new Trie[26];
+        boolean isEnd=false;
+    }
+    Trie t=new Trie();
+
+    public void addWord(String word) {
+        Trie cur=t;
+        for(char c:word.toCharArray()){
+            int idx=c-'a';
+            if(cur.next[idx]==null){
+                cur.next[idx]=new Trie();
+            }
+            cur=cur.next[idx];
+        }
+        cur.isEnd=true;
+    }
+
+    public boolean search(String word) {
+        return dfs(word,t,0);
+
+    }
+
+    boolean dfs(String s, Trie p, int sIdx) {
+        int n = s.length();
+        if (n == sIdx) return p.isEnd;
+        char c = s.charAt(sIdx);
+        if (c == '.') {
+            for (int j = 0; j < 26; j++) {
+                if (p.next[j] != null && dfs(s, p.next[j], sIdx + 1)) return true;
+            }
+            return false;
+        } else {
+            int u = c - 'a';
+            if (p.next[u] == null) return false;
+            return dfs(s, p.next[u], sIdx + 1);
+        }
+    }
+
+}
